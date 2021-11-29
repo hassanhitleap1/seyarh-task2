@@ -65,13 +65,37 @@ class SiteController extends Controller
         $drive= new Drive();
         $client=$drive->get_client();
         $service = new \Google_Service_Drive($client);
+
+        $search = "mimeType = 'image/jpeg'";
+      
         $optParams = array(
-            'pageSize' => 10,
-            'fields' => 'nextPageToken, files(id, name)'
+            "q" => $search,
+            'pageSize' => 25,
+            'fields' => 'nextPageToken, files(id, name ,properties ,mimeType ,modifiedTime, createdTime, thumbnailLink, webContentLink, webViewLink,size) '
         );
-        $results = $service->files->listFiles($optParams);
+        
+       $results = $service->files->listFiles($optParams);
+
+      
+
+     
         return $this->render('index',['results'=>$results]);
     }
+
+
+
+
+
+    public function actionGetClient()
+    {
+        # code...
+        return "sss";
+    }
+
+
+
+
+
 
     /**
      * Login action.

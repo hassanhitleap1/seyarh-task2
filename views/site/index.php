@@ -1,4 +1,5 @@
 <?php
+use app\components\FileHelper;
 $this->title = 'Index';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -9,22 +10,32 @@ $this->params['breadcrumbs'][] = $this->title;
             <th scope="col">#</th>
             <th scope="col">title</th>
             <th scope="col">thumbnailLink</th>
+            <th scope="col">EmbedLink</th>
+            
             <th scope="col">modifiedDate</th>
+            <th scope="col">webContentLink</th>
+            
             <th scope="col">FileSize</th>
             <th scope="col">ownerNames</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
+        
             <?php foreach ($results as $key=>$result):?>
-                <th ><?= ++$key?></th>
-                <td><?= $result->title?></td>
-                <td><?= $result->thumbnailLink?></td>
-                <td><?= $result->modifiedDate?></td>
-                <td><?= $result->FileSize?></td>
-                <td><?= $result->ownerNames?></td>
+                <tr>
+                    <th ><?= ++$key?></th>
+                    <td><?= $result['name']?></td>
+                    <td><img  style="with:200px;height: 200px;" src="<?= $result['webContentLink'] ?>" /></td>
+                    <td> <a href="<?= $result['webContentLink'] ?>" download> download</a></td>
+                
+                    <td><?= date('Y-m-d',strtotime($result['createdTime']))?></td>
+                    <th scope="col"><?= $result['webContentLink']?></th>
+                    
+                    <td><?= FileHelper::formatSizeUnits($result['size']) ?></td>
+                    <td><?= $result['ownersDataType']?></td>
+                </tr>
             <?php endforeach;?>
-        </tr>
+        
 
         </tbody>
     </table>
