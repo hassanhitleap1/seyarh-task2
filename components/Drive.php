@@ -9,8 +9,10 @@ class Drive extends BaseObject
         $client = new \Google_Client();
         $client->setApplicationName('hassan');
         $client->setRedirectUri('http://localhost:8080');
+
         $client->setScopes(\Google_Service_Drive::DRIVE);
         $client->setAuthConfig('client_secret.json');
+
         $client->setAccessType('offline');
         $client->setPrompt('select_account consent');
         return $client;
@@ -19,8 +21,10 @@ class Drive extends BaseObject
     public  function get_client()
     {
         $client = $this->getClient();
-
         $tokenPath = 'token.json';
+        if (isset($_GET['code'])) {
+            $tokenPath = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+        }
 
         if (file_exists($tokenPath)) {
             $accessToken = json_decode(file_get_contents($tokenPath), true);
@@ -37,7 +41,7 @@ class Drive extends BaseObject
                 $authUrl = $client->createAuthUrl();
                 printf("Open the following link in your browser:\n%s\n", $authUrl);
                 print 'Enter verification code: ';
-                $authCode = trim(fgets(STDIN));
+                $authCode = trim(fgets('STDIN'));
 
                 // Exchange authorization code for an access token.
                 $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);

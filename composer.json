@@ -46,7 +46,8 @@
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject",
             "yii\\composer\\Installer::postInstall"
-        ]
+        ],
+        "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
     },
     "extra": {
         "yii\\composer\\Installer::postCreateProject": {
@@ -61,6 +62,12 @@
         "yii\\composer\\Installer::postInstall": {
             "generateCookieValidationKey": [
                 "config/web.php"
+            ]
+        },
+        "extra": {
+            "google/apiclient-services": [
+                "Drive",
+                "YouTube"
             ]
         }
     },
