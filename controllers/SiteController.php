@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\Drive;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +62,22 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+
+
+        $drive= new Drive();
+        $client = $drive->get_client();
+        $service = new \Google_Service_Drive($client);
+        $service->listSOFolder($service);
+        exit();
+// Print the names and IDs for up to 10 files.
+        $optParams = array(
+            'pageSize' => 10,
+            'fields' => 'nextPageToken, files(id, name)'
+        );
+        $results = $service->files->listFiles($optParams);
+
+        return $this->render('index',['results'=>$results]);
     }
 
     /**

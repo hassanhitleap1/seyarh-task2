@@ -14,9 +14,9 @@ $config = [
     'components' => [
         'googleDrive' => [
             'class' => 'lhs\Yii2FlysystemGoogleDrive',
-            'clientId'     => 'xxx YOUR CLIENT ID xxx',
-            'clientSecret' => 'xxx YOUR CLIENT SECRET xxx',
-            'refreshToken' => 'xxx YOU REFRESH TOKEN xxx',
+            'clientId'     => '919184508415-5e50km3sgub1k9cd1f62s9qekjdqlscp.apps.googleusercontent.com',
+            'clientSecret' => 'Rtiuw9Zgv0HjqqQyf0jyQFPt',
+            'refreshToken' => 'Rtiuw9Zgv0HjqqQyf0jyQFPt',
             // 'rootFolderId' => 'xxx ROOT FOLDER ID xxx'
         ],
         'request' => [
