@@ -71,7 +71,7 @@ class SiteController extends Controller
         $optParams = array(
             "q" => $search,
             'pageSize' => 25,
-            'fields' => 'nextPageToken, files(id, name ,properties ,mimeType ,modifiedTime, createdTime, thumbnailLink, webContentLink, webViewLink,size) '
+            'fields' => 'nextPageToken, files(id, name ,properties ,mimeType ,modifiedTime, createdTime, thumbnailLink, webContentLink, webViewLink,size,owners) '
         );
         
        $results = $service->files->listFiles($optParams);

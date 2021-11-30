@@ -32,7 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th scope="col"><?= $result['webContentLink']?></th>
                     
                     <td><?= FileHelper::formatSizeUnits($result['size']) ?></td>
-                    <td><?= $result['ownersDataType']?></td>
+                    <td>
+                        <ul>
+                        <?php foreach ($result['owners'] as $owner):?>
+                            <li><?= $owner['displayName']?> </li>
+                        <?php endforeach;?>
+                        </ul>
+                    </td>
                 </tr>
             <?php endforeach;?>
         
